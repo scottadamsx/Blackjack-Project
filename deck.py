@@ -1,3 +1,4 @@
+#! usr\bin\env python3
 import random
 def initialize_deck(suits,rank):
     suits = ["Clubs","Diamonds","Hearts","Spades"]
@@ -20,7 +21,7 @@ def initialize_deck(suits,rank):
 
 
 def shuffle_deck(deck):
-    shuffledDeck = random.shuffle(cards)
+    shuffledDeck = random.shuffle(deck)
     return shuffledDeck
 
 
