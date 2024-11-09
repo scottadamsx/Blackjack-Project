@@ -2,7 +2,7 @@
 
 def read_money():
     try:
-        with open("money.txt", "r") as file:
+        with open("data/money.txt", "r") as file:
             money = float(file.read())
         return money
     except FileNotFoundError:
