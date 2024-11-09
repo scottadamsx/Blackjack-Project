@@ -1,14 +1,4 @@
-def calculate_total(hand):
-    total = sum([card[2] for card in hand if card[1] != "Ace"])
-    aces = [card for card in hand if card[1] == "Ace"]
-    while aces:
-        ace_choice = int(input("Do you want this Ace to be a 1 or 11?: "))
-        if ace_choice == 11 and total + 11 <= 21:
-            total += 11
-        else:
-            total += 1
-        break
-    return total
+import db
 
 def buy_chips():
         chips = input("Would you like to buy more chips? (y/n): ").lower()
@@ -24,45 +14,84 @@ def buy_chips():
             print("Thanks for playing!")
         return money
 
-def win_check(player_total, dealer_total, bet, money, hand):
-    if len(hand) == 2 and player_total == 21:
+
+
+def win_check(playerTotal, dealerTotal, bet, money, playerHand, dealerHand):
+    # instance where YOU gets a natural blackjack
+    if len(playerHand) == 2 and playerTotal == 21:
         print("BLACKJACK!")
         payout = round(bet * 1.5, 2)
         money += payout
         db.write_money(money)
-    elif dealer_total > 21 or player_total > dealer_total and player_total <= 21:
+
+    # instance where dealer gets a natural blackjack
+    elif len(dealerHand) == 2 and dealerTotal == 21:
+        print("You lose!")
+        money -= bet
+        db.write_money(money)
+
+    # instance where the dealer busts OR the player beats the dealer in value but DOESNT bust
+    elif dealerTotal > 21 or playerTotal > dealerTotal and playerTotal <= 21:
         print("You win!")
         payout = round(bet * 1.5, 2)
         money += payout
         db.write_money(money)
-    elif player_total > 21 or dealer_total > player_total and dealer_total <=21:
+
+    # instance where you bust or the dealer beats the player in value
+    elif playerTotal > 21 or dealerTotal > playerTotal and dealerTotal <=21:
         print("You lose!")
         money -= bet
         db.write_money(money)
-    elif player_total == dealer_total:
+    
+    elif playerTotal == dealerTotal:
         print("tie")
+
+
     return money
+
+
 
 def place_bet(money):
     while True:
         try:
-            bet = float(input(f"Money: ${money}\nBet amount:"))
+            bet = float(input("Bet amount:"))
             if bet >= 5 and bet <= 1000:
-                print("Dealers show card:")
+                return bet
+                break
             elif bet > money:
                 print("Bet can't be larger than your current money")
             else:
                 print("error, bet cannot be less than 5, or more than 1000")
         except ValueError:
             print("Error: Please enter a valid integer.")
+
+
+
+def calculate_total(hand):
+    total = sum(card[2] for card in hand)
+    return total
+
+
+
+def check_for_ace(hand):
+    total = calculate_total(hand)
+    for card in hand:
+        if card[1] == "Ace":
+            ace_choice = int(input("Do you want this Ace to be a 1 or 11?: "))
+            if ace_choice == 11 and total + 11 <= 21:
+                card[2] = 11
+            else:
+                card[2] = 1
     
+
+
+
 def hit_or_stand(deck, hand):
     while True:
         action = input("\nHit or stand? (hit/stand): ").lower()
-        if action == 'h':
-            hand.append(deck.pop())
-            return True
-        elif action == 's':
-            return False
+        if action == 'hit':
+            return action
+        elif action == 'stand':
+            return action
         else:
-            print("Invalid input. Please enter 'h' to Hit or 's' to Stand.")
+            print("Invalid input. Please enter 'hit' to Hit or 'stand' to Stand.")
