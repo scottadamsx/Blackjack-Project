@@ -26,15 +26,15 @@ def start_round(playerMoney):
     deal_card(dealerHand, deck, 2)
 
     # include the display of the first data
-    print("DEALERS SHOW CARD:")
+    print("\nDEALERS SHOW CARD:")
     print(f"{dealerHand[0][1]} of {dealerHand[0][0]}\n")
 
     print("YOUR CARDS")
     for card in playerHand:
-        print(f"{card[1]} of {card[0]}")
-    print("")
+        print(f"{card[1]} of {card[0]}\n")
 
     return playerHand, dealerHand, bet, deck
+
 
 
 def display_result():
@@ -48,11 +48,10 @@ def main():
     display_title()
 
     playerMoney = db.read_money()
-    playerHand, dealerHand, bet, deck = start_round(playerMoney)
-    check_for_ace(playerHand)
-
-    
     while playerMoney >= 5:
+            
+            playerHand, dealerHand, bet, deck = start_round(playerMoney)
+            check_for_ace(playerHand)
  
             playerChoice = hit_or_stand(deck, playerHand)
 
@@ -60,6 +59,8 @@ def main():
                 deal_card(playerHand, deck)
                 check_for_ace(playerHand)
 
+            
+            dealer_continue(dealerHand, deck)
             playerTotal = calculate_total(playerHand)
             dealerTotal = calculate_total(dealerHand)
 

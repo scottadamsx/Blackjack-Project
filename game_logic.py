@@ -83,7 +83,10 @@ def check_for_ace(hand):
             else:
                 card[2] = 1
     
-
+def dealer_continue(dealerTotal,dealerHand,deck):
+    while dealerTotal < 17:
+            dealerHand.append(deck.pop())
+            dealerTotal = calculate_total(dealerHand)
 
 
 def hit_or_stand(deck, hand):
