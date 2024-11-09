@@ -25,10 +25,30 @@ PROGRAM STRUCTURE
     grab players money from file
 
     while game runs
-        place bet
 
-        deal 2 cards to player and dealer
-        ask player if they want to hit or stand (call hit_or_stand function)
+        start round
+            place bet
+    
+            deal 2 cards to player and dealer (show one of dealers)
+            check if either players have a blackjack
+            ask player if they want to hit or stand (call hit_or_stand function)
+            if they hit:
+                give them another card
+            if they stand:
+                end round
+                determine if dealer hits or stands
+                determine who won
+                payout bet (function)
+
+            ask player if they would like to play again
+            if yes:
+                play another round
+            if no:
+                end game
+                write new money value to file (function from db.py)
+                exit program
+
+            
         
 
 
