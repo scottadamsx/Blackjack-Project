@@ -29,8 +29,7 @@ def shuffle_deck(deck):
 # pops a card from the deck into a hand variable, dev decides which hand to place the card in
 def deal_card(hand, deck, numOfCards=1):
     for i in range(numOfCards):
-        card = random.choice(deck)
-        deck.pop(card)
+        card = deck.pop()
         hand.append(card)
 
 

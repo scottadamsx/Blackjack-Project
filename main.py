@@ -15,6 +15,8 @@ def start_round(playerMoney):
 
     deck = initialize_deck()
 
+    random.shuffle(deck)
+
     print(f"money: {playerMoney}")
     bet = float(input("bet amount: "))
 
@@ -24,6 +26,12 @@ def start_round(playerMoney):
     deal_card(dealerHand, deck, 2)
 
     # include the display of the first data
+    print("DEALERS SHOW CARD:")
+    print(f"{dealerHand[0][1]} of {dealerHand[0][0]}\n")
+
+    print("YOUR CARDS")
+    for card in playerHand:
+        print(f"{card[1]} of {card[0]}")
 
     return playerHand, dealerHand, bet
 
@@ -41,7 +49,6 @@ def main():
     print("player has: ", playerMoney)
 
     playerHand, dealerHand, bet = start_round(playerMoney)
-    print(playerHand, dealerHand, bet)
 
 if __name__ == "__main__":
     main()

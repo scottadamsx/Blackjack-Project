@@ -10,5 +10,5 @@ def read_money():
         return money
 
 def write_money(money):
-    with open("money.txt", "w") as file:
+    with open("data/money.txt", "w") as file:
         file.write(str(round(money, 2)))
