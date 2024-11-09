@@ -37,7 +37,8 @@ def start_round(playerMoney):
     return playerHand, dealerHand, bet, deck
 
 
-
+def display_result():
+    pass
 
 
 
@@ -48,24 +49,27 @@ def main():
 
     playerMoney = db.read_money()
     playerHand, dealerHand, bet, deck = start_round(playerMoney)
+    check_for_ace(playerHand)
 
-    playerChoice = ""
+    
     while playerMoney >= 5:
-
-        while playerChoice == "hit" and calculate_total(playerHand) < 21:
-            
+ 
             playerChoice = hit_or_stand(deck, playerHand)
 
             if playerChoice == "hit":
-                deal_card(playerHand)
+                deal_card(playerHand, deck)
                 check_for_ace(playerHand)
 
             playerTotal = calculate_total(playerHand)
             dealerTotal = calculate_total(dealerHand)
 
-            win_check(playerTotal, dealerTotal, bet, playerMoney, playerHand)
+            win_check(playerTotal, dealerTotal, bet, playerMoney, playerHand, dealerHand)
+            repeat = input("Go again?")
+            if repeat.lower() != "y":
+                break
 
-    buy_chips(playerMoney)
+    #buy_chips(playerMoney)
+    
 
 if __name__ == "__main__":
     main()
