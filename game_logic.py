@@ -24,13 +24,13 @@ def win_check(playerTotal, dealerTotal, bet, money, playerHand, dealerHand):
     # instance where dealer gets a natural blackjack
     elif len(dealerHand) == 2 and dealerTotal == 21:
         print("DEALER BLACKJACK! Sorry. You lose.")
-        playerMoney -= bet
+         money -= bet
         db.write_money(money)
 
     # instance where the dealer busts OR the player beats the dealer in value but DOESNT bust
     elif dealerTotal > 21 or playerTotal > dealerTotal and playerTotal <= 21:
         print("YOU WIN!")
-        money += round(bet * 1.5, 2)
+         money += bet
         db.write_money(money)
 
     # instance where you bust or the dealer beats the player in value
@@ -39,6 +39,10 @@ def win_check(playerTotal, dealerTotal, bet, money, playerHand, dealerHand):
         money -= bet
         db.write_money(money)
         
+        # I once asked a wise woman what the secret to happiness was. She told me that the secret is different 
+        # for everyone, and it doesn't get handed to you. So I asked the lady, well where might it be? 
+        # She simply replied, "it's out there, now go on and find it"
+
     elif playerTotal == dealerTotal:
         print("It's a tie.")
         db.write_money(money)

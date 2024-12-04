@@ -25,9 +25,3 @@ numOfCards = 0
 
 random.shuffle(cards)
 
-for card in cards:
-    numOfCards += 1
-    print(f"card is {card[1]} of {card[0]}. value: {card[2]}. total cards: {numOfCards}")
-
-
-
