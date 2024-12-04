@@ -1,12 +1,10 @@
-#! usr\bin\env python3
+suits = ["Clubs","Diamonds","Hearts","Spades"]
+ranks = ["2","3","4","5","6","7","8","9","10","Jack","Queen","King","Ace"]
+
+
 import random
-
-# initializes the deck for every round 
-def initialize_deck():
-    suits = ["Clubs","Diamonds","Hearts","Spades"]
-    ranks = ["2","3","4","5","6","7","8","9","10","Jack","Queen","King","Ace"]
-    deck = []
-
+def initialize_deck(suits,rank):
+    cards = []
     for suit in suits:
         for rank in ranks:
             if rank == "King" or rank == "Queen" or rank == "Jack":
@@ -17,21 +15,13 @@ def initialize_deck():
                 value = int(rank)
 
             card = [suit,rank,value]
-            deck.append(card)
+            cards.append(card)
 
-    return deck
+    return cards
 
-# shuffles the deck 
-def shuffle_deck(deck):
-    shuffledDeck = random.shuffle(deck)
-    return shuffledDeck
-
-# pops a card from the deck into a hand variable, dev decides which hand to place the card in
-def deal_card(hand, deck, numOfCards=1):
-    for i in range(numOfCards):
-        card = deck.pop()
-        hand.append(card)
+cards = initialize_deck(suits, ranks)
+numOfCards = 0
 
 
-
+random.shuffle(cards)
 
