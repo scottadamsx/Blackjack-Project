@@ -4,7 +4,7 @@ def read_money():
             money = float(file.read())
     except FileNotFoundError:
         print("Error: Money file not found. Starting with $100.")
-        money = 100.0
+        money = 100
     return money
 
 def write_money(money):
