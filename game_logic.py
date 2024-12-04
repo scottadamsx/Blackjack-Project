@@ -24,13 +24,13 @@ def win_check(playerTotal, dealerTotal, bet, money, playerHand, dealerHand):
     # instance where dealer gets a natural blackjack
     elif len(dealerHand) == 2 and dealerTotal == 21:
         print("DEALER BLACKJACK! Sorry. You lose.")
-         money -= bet
+        money -= bet
         db.write_money(money)
 
     # instance where the dealer busts OR the player beats the dealer in value but DOESNT bust
     elif dealerTotal > 21 or playerTotal > dealerTotal and playerTotal <= 21:
         print("YOU WIN!")
-         money += bet
+        money += bet
         db.write_money(money)
 
     # instance where you bust or the dealer beats the player in value
